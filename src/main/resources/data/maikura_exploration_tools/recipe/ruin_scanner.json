@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AEA",
+    "GCG",
+    "ARA"
+  ],
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "E": "minecraft:ender_eye",
+    "G": "minecraft:gold_ingot",
+    "C": "minecraft:compass",
+    "R": "minecraft:redstone"
+  },
+  "result": {
+    "id": "maikura_exploration_tools:ruin_scanner",
+    "count": 1
+  }
+}

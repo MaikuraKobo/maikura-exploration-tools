@@ -1,0 +1,63 @@
+plugins {
+    id 'fabric-loom' version '1.14.10'
+    id 'maven-publish'
+}
+
+version = '1.1.0'
+group = 'jp.maikura'
+
+base {
+    archivesName = "maikura-exploration-tools-fabric-mc1.21.11-v${project.version}"
+}
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.terraformersmc.com/releases/' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.11'
+    mappings 'net.fabricmc:yarn:1.21.11+build.1:v2'
+    modImplementation 'net.fabricmc:fabric-loader:0.18.1'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.139.1+1.21.11'
+    modCompileOnly 'com.terraformersmc:modmenu:17.0.0'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = 'UTF-8'
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+// 舞倉工房ルール: 生成JAR名にバージョンが二重付与されないよう明示固定。
+// 通常JAR: maikura-exploration-tools-fabric-mc1.21.11-v1.1.0.jar
+// ソースJAR: maikura-exploration-tools-fabric-mc1.21.11-v1.1.0-sources.jar
+
+def releaseJarName = "maikura-exploration-tools-fabric-mc1.21.11-v${project.version}.jar"
+def releaseSourcesJarName = "maikura-exploration-tools-fabric-mc1.21.11-v${project.version}-sources.jar"
+
+tasks.withType(Jar).configureEach {
+    archiveVersion.set("")
+}
+
+tasks.matching { it.name == "jar" || it.name == "remapJar" }.configureEach {
+    archiveFileName.set(releaseJarName)
+}
+
+tasks.matching { it.name == "sourcesJar" || it.name == "remapSourcesJar" }.configureEach {
+    archiveFileName.set(releaseSourcesJarName)
+}

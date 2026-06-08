@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "maikura_exploration_tools",
+  "version": "${version}",
+  "name": "Maikura Exploration Tools",
+  "description": "舞倉工房の探査専用ツールMOD。遺跡探査器で周囲の宝箱・スポナー・発掘対象・コンテナ付き乗り物を探査します。",
+  "authors": ["舞倉工房 / MAIKURA KOBO"],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/maikura_exploration_tools/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["jp.maikura.explorationtools.MaikuraExplorationToolsMod"],
+    "client": ["jp.maikura.explorationtools.client.MaikuraExplorationToolsClient"],
+    "modmenu": ["jp.maikura.explorationtools.client.config.MaikuraExplorationToolsModMenu"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "1.21.11",
+    "fabric-api": "*",
+    "java": ">=21"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "update_checker": false
+    }
+  }
+}
